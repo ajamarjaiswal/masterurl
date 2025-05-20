@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Popup with JavaScript</title>
+  <style>
+    /* Overlay */
+    .popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      display: none;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Popup box */
+    .popup-box {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      text-align: center;
+    }
+
+    /* Buttons */
+    .btn {
+      padding: 10px 20px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 5px;
+      background-color: #333;
+      color: white;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background-color: #555;
+    }
+  </style>
+</head>
+<body>
+
+  <button class="btn" id="openBtn">Open Popup</button>
+
+  <div class="popup-overlay" id="popup">
+    <div class="popup-box">
+      <h2>Hello!</h2>
+      <p>This is a JavaScript popup.</p>
+      <button class="btn" id="closeBtn">Close</button>
+    </div>
+  </div>
+
+  <script>
+    const popup = document.getElementById("popup");
+    const openBtn = document.getElementById("openBtn");
+    const closeBtn = document.getElementById("closeBtn");
+
+    openBtn.addEventListener("click", () => {
+      popup.style.display = "flex";
+    });
+
+    closeBtn.addEventListener("click", () => {
+      popup.style.display = "none";
+    });
+  </script>
+
+</body>
+</html>
