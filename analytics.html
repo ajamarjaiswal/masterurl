@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Analytics Dashboard</title>
+  <link rel="stylesheet" href="analytics.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="sidebar">
+    <div class="logo">📊</div>
+    <ul>
+      <li><a href="home.html">🏠 Home</a></li>
+      <li><a href="link.html">🔗 Link</a></li>
+      <li><a href="analytics.html">📊 Analytics</a></li>
+      <li><a href="qrcode.html">🌐 QR Codes</a></li>
+      <li><a href="index.html">🔓 Log Out</a></li>
+    </ul>
+  </div>
+
+  <div class="main">
+    <h2>📊 Analytics Overview</h2>
+     <!-- Bar Chart -->
+    <div class="chart-container">
+      <canvas id="barChart"></canvas>
+    </div>
+
+
+    <!-- Doughnut Chart -->
+    <div class="chart-container">
+      <canvas id="doughnutChart"></canvas>
+      <button class="btn" onclick="downloadChart()">📥 Download PNG</button>
+    </div>
+
+   
+    <!-- Metric Summary (Now at Bottom) -->
+    <div class="text-report">
+      <h3>🔍 Metrics Summary</h3>
+      <ul>
+        <li><strong>Views:</strong> <span id="viewsCount">0</span> (🟠 Orange)</li>
+        <li><strong>Visitors:</strong> <span id="visitorsCount">0</span> (🔵 Blue)</li>
+        <li><strong>Click Rate:</strong> <span id="clickRateCount">0</span> (🟢 Green)</li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    // Sample stats
+    const stats = {
+      views: 1500,
+      visitors: 900,
+      clickRate: 800
+    };
+
+    // Fill metric values
+    document.getElementById("viewsCount").textContent = stats.views;
+    document.getElementById("visitorsCount").textContent = stats.visitors;
+    document.getElementById("clickRateCount").textContent = stats.clickRate;
+
+    // Doughnut Chart
+    const doughnutCtx = document.getElementById('doughnutChart').getContext('2d');
+    const doughnutChart = new Chart(doughnutCtx, {
+      type: 'doughnut',
+      data: {
+        labels: ['Views', 'Visitors', 'Click Rate'],
+        datasets: [{
+          data: [stats.views, stats.visitors, stats.clickRate],
+          backgroundColor: ['orange', 'steelblue', 'seagreen'],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'bottom'
+          }
+        }
+      }
+    });
+
+    // Bar Chart
+    const barCtx = document.getElementById('barChart').getContext('2d');
+    const barChart = new Chart(barCtx, {
+      type: 'bar',
+      data: {
+        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        datasets: [
+          {
+            label: 'Views',
+            data: [200, 250, 180, 300, 320, 260, 350],
+            backgroundColor: 'orange'
+          },
+          {
+            label: 'Visitors',
+            data: [120, 150, 110, 180, 190, 160, 210],
+            backgroundColor: 'steelblue'
+          },
+          {
+            label: 'Clicks',
+            data: [90, 100, 80, 130, 140, 110, 170],
+            backgroundColor: 'seagreen'
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'top'
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+
+    // Download Doughnut Chart as PNG
+    function downloadChart() {
+      const link = document.createElement('a');
+      link.download = 'analytics-chart.png';
+      link.href = document.getElementById('doughnutChart').toDataURL('image/png');
+      link.click();
+    }
+  </script>
+</body>
+</html>
