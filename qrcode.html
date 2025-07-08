@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>QR Code Generator</title>
+  <link rel="stylesheet" href="home.css">
+  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
+  <style>
+    .qr-container {
+      margin: 40px auto;
+      text-align: center;
+      max-width: 600px;
+      padding: 20px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      animation: fadeIn 1s ease;
+    }
+
+    .qr-container input {
+      padding: 10px;
+      width: 80%;
+      max-width: 400px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+   <div class="sidebar">
+    <div class="logo">🌐</div>
+    <ul>
+      <li><a href="home.html">🏠 Home</a></li>
+      <li><a href="link.html">🔗 Link</a></li>
+      <li><a href="analytics.html">📊 Analytics</a></li>
+      <li><a href="qrcode.html">🌐 QR Codes</a></li>
+      <li><a href="index.html">🔓 Log Out</a></li>
+    </ul>
+  </div>
+
+  <div class="main">
+    <h2>QR Code Generator</h2>
+    <div class="qr-container">
+      <input type="text" id="qrText" placeholder="Enter URL or text to generate QR" />
+      <button class="btn" onclick="generateQR()">Generate QR</button>
+      <div id="qrCode" style="margin-top: 20px;"></div>
+      <div id="qrLabel" style="margin-top: 10px; font-weight: bold; color: #333;"></div>
+    </div>
+
+    <div style="margin-top: 50px; padding: 20px; background: white; border-radius: 12px; box-shadow: 0 0 10px rgba(0,0,0,0.1); max-width: 700px; margin-inline: auto;">
+      <p><strong>ℹ️ Tips:</strong></p>
+      <ul style="line-height: 1.8;">
+        <li>Use the QR code on flyers, business cards, or digital media.</li>
+        <li><a href="https://masterurl.site" target="_blank">Visit masterurl.site for more features</a></li>
+        <li>Branded QR codes improve trust and conversions.</li>
+        <li>Keep your URLs short and relevant.</li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    function generateQR() {
+      const qrText = document.getElementById('qrText').value;
+      const qrCodeDiv = document.getElementById('qrCode');
+      const qrLabel = document.getElementById('qrLabel');
+      qrCodeDiv.innerHTML = '';
+      qrLabel.innerText = '';
+
+      if (!qrText.trim()) {
+        qrLabel.innerText = "Please enter text above.";
+        return;
+      }
+
+      QRCode.toCanvas(document.createElement('canvas'), qrText, function (error, canvas) {
+        if (error) console.error(error);
+        qrCodeDiv.appendChild(canvas);
+        qrLabel.innerText = `🔗 ${qrText}`;
+      });
+    }
+  </script>
+</body>
+</html>

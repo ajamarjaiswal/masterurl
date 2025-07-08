@@ -35,9 +35,7 @@ body {
   background: #f9f9f9;
 }
 
-.add-link-btn {
- 
-}
+
 
 .table-container {
   margin-top: 80px;
@@ -108,12 +106,13 @@ a ,a:visited{
     /* Popup box */
     .popup-box {
       background: white;
-      padding: 20px;
+      padding: 50px;
       border-radius: 12px;
       box-shadow: 0 0 10px rgba(0,0,0,0.3);
       text-align: center;
       height: 300px;
       width: 700px;
+      
     }
 
     /* Buttons */
@@ -170,8 +169,10 @@ a ,a:visited{
       font-size: 16px;
       border-radius: 20px;
       cursor: pointer;
+      margin: 10px;
     }
 
     button:hover {
       background-color: darkorange;
     }
+    
